@@ -1,5 +1,5 @@
-
 flask
 flask_sqlalchemy
 psycopg2-binary
 pytest
+tenacity==9.1.2
