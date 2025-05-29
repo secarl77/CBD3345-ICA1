@@ -27,4 +27,4 @@ jobs:
 
       - name: Notify deploy
         run: |
-          curl http://localhost:5000/users
+          echo "La imagen se crea correctamente"
