@@ -1,6 +1,9 @@
 
 name: CD
 
+env:
+  MESSAGE: The image was create correctly
+
 on:
   push:
     branches: [develop]
@@ -27,4 +30,4 @@ jobs:
 
       - name: Notify deploy
         run: |
-          echo "La imagen se crea correctamente"
+          echo $MESSAGE
