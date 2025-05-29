@@ -27,4 +27,5 @@ jobs:
 
       - name: Notify deploy
         run: |
-          curl -X POST ${{ secrets.DEPLOY_WEBHOOK_URL }}
+          #curl -X POST ${{ secrets.DEPLOY_WEBHOOK_URL }}
+          curl http://localhost:5000/users
