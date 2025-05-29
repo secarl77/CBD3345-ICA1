@@ -1,0 +1,40 @@
+name: Manual PR Create
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_title:
+        description: 'Título del Pull Request'
+        required: true
+        default: 'Merge develop into main'
+      pr_body:
+        description: 'Descripción del Pull Request'
+        required: false
+        default: 'Automated pull request from develop to main'
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh -y
+
+      - name: Authenticate GitHub CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GITHUB_TOKEN" | gh auth login --with-token
+
+      - name: Create Pull Request
+        env:
+          PR_TITLE: ${{ inputs.pr_title }}
+          PR_BODY: ${{ inputs.pr_body }}
+        run: |
+          gh pr create --base main --head develop --title "$PR_TITLE" --body "$PR_BODY" --repo ${{ github.repository }}
