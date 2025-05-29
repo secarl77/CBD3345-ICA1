@@ -1,4 +1,4 @@
-name: Manual CodeQL Scan
+name: Manual CodeQL Scan1
 
 on:
   workflow_dispatch:
