@@ -9,28 +9,41 @@ on:
         default: 'develop'
         type: string
 
+name: CodeQL Manual/PR Analysis
+
+on:
+  # Permite ejecutar el análisis manualmente desde la interfaz de GitHub
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to analyze'
+        required: true
+        default: 'develop'
+
+
 jobs:
   analyze:
-    name: Run CodeQL manually
+    name: CodeQL Analysis
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.scan_target }}
+          ref: ${{ github.event.inputs.branch || github.head_ref }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Run CodeQL
-        uses: codebeltnet/codeql-scan@v1.0.0
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
         with:
           languages: python
-          build-mode: none
+          build-mode: none  # Para proyectos Python no se necesita build
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
