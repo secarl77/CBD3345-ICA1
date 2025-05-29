@@ -1,14 +1,3 @@
-name: Manual CodeQL Scan1
-
-on:
-  workflow_dispatch:
-    inputs:
-      scan_target:
-        description: '¿Qué rama deseas escanear?'
-        required: true
-        default: 'develop'
-        type: string
-
 name: CodeQL Manual/PR Analysis
 
 on:
@@ -20,6 +9,9 @@ on:
         required: true
         default: 'develop'
 
+  # Ejecuta automáticamente en los pull requests a main
+  pull_request:
+    branches: [main]
 
 jobs:
   analyze:
