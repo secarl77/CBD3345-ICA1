@@ -17,3 +17,11 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
     return jsonify({"id": new_user.id, "name": new_user.name}), 201
+
+@bp.route('/add_user')
+def add_user():
+    new_user = User(name="Carlos")
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify({"message": f"User {new_user.name} added with id {new_user.id}"})
+
