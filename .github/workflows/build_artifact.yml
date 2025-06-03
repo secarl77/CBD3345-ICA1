@@ -2,7 +2,7 @@ name: Artifact Demo
 
 on:
   push:
-    branches: [ main ]
+    branches: [ develop ]
 
 jobs:
   build:
