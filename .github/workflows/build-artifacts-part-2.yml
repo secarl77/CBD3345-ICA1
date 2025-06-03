@@ -2,7 +2,6 @@ name: Artifact Demo Upload
 
 on:
   push:
-    branches: [ develop ]
     tags:
       - 'v*'
 
