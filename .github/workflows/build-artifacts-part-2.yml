@@ -2,7 +2,6 @@ name: Artifact Demo Upload
 
 on:
   push:
-    branches: [ develop ]
     tags:
       - 'v*'
 
@@ -31,5 +30,5 @@ jobs:
       with:
         files: artifacts/build-info.txt
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_PATH }}
 
