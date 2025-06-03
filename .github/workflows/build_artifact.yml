@@ -1,0 +1,24 @@
+name: Artifact Demo
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Generate files
+      run: |
+        mkdir artifacts
+        echo "Build complete at $(date)" > artifacts/build-info.txt
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact
+        path: artifacts/
