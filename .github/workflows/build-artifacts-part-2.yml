@@ -1,4 +1,4 @@
-name: Artifact Demo
+name: Artifact Demo Upload
 
 on:
   push:
