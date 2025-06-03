@@ -14,6 +14,7 @@ jobs:
 
     - name: Generate files
       run: |
+        rm -rfv artifacts
         mkdir artifacts
         echo "Build complete at $(date)" > artifacts/build-info.txt
 
